@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ulrikaugustsson/is_white/issues"
   },
-  "homepage": "https://github.com/ulrikaugustsson/is_white#readme"
+  "homepage": "https://github.com/ulrikaugustsson/is_white#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }

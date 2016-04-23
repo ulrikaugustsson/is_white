@@ -11,19 +11,26 @@ image.onload = function() {
   document.querySelector('.main')
     .appendChild(image);
 
+  canvas.width = image.width;
+  canvas.height = image.height;
+
   context.drawImage(image, 0, 0);
 
+  // context.getImageData(xStart, yStart, rectWidth, rectHeight);
   const topBorder = context.getImageData(0, 0, image.width, 5);
-  const leftBorder = context.getImageData(0, 0, 5, image.height);
   const bottomBorder = context.getImageData(0, image.height - 5, image.width, 5);
+  const leftBorder = context.getImageData(0, 0, 5, image.height);
   const rightBorder = context.getImageData(image.width - 5, 0, 5, image.height);
 
   const borderArray = [topBorder, leftBorder, bottomBorder, rightBorder];
 
+  context.putImageData(topBorder, 0, 0);
+  context.putImageData(bottomBorder, 0, image.height - 5);
+  context.putImageData(leftBorder, 0, 0);
+  context.putImageData(rightBorder, image.width - 5, 0);
+
   const rgbArrays = borderArray
     .map(getRGBstrings);
-
-  console.log(rgbArrays.length);
 
   const numberOfWhites = rgbArrays
     .map(rgbArray => {
@@ -60,7 +67,7 @@ const getRGBstrings = imageData => {
   const rgbArr = [];
 
   let i, rgbVal;
-  for (i = 0; i < imageData.data.length; i += 3) {
+  for (i = 0; i < imageData.data.length; i += 4) {
     rgbVal = '' + imageData.data[i] + ',' + imageData.data[i + 1] + ',' + imageData.data[i + 2];
     rgbArr.push(rgbVal);
   }
@@ -69,7 +76,11 @@ const getRGBstrings = imageData => {
 }
 
 const isWhite = rgbString => {
-  return rgbString.split(',').every(color => color === '255');
+  const whiteRet = rgbString.split(',').every(color => color === '255');
+  if (!whiteRet) {
+    console.log('not white: ', rgbString);
+  }
+  return whiteRet;
 }
 
 image.src = '/white.png';
