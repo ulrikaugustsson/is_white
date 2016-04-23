@@ -6,10 +6,16 @@ image.crossOrigin = "anonymous";
 const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 
+document.querySelector('.test-button').addEventListener('click', (ev) => {
+    image.src = document.querySelector('.url-input').value;
+});
+
 image.onload = function() {
   console.log('loaded');
   document.querySelector('.main')
     .appendChild(image);
+
+  console.time('done');
 
   canvas.width = image.width;
   canvas.height = image.height;
@@ -45,7 +51,6 @@ image.onload = function() {
           return newVal;
         }, 0);
     })
-    .map(asd => {console.log(asd); return asd;})
     .reduce((acc, curr) => acc + curr, 0);
 
   const totalPixels = rgbArrays.reduce((acc, curr) => acc + curr.length, 0);
@@ -55,6 +60,7 @@ image.onload = function() {
   document.querySelector('.main').appendChild(mainEle);
 
   console.log(numberOfWhites, ' > ', totalPixels);
+  console.timeEnd('done');
 
   if (numberOfWhites > totalPixels * 0.7) {
     mainEle.innerText = 'This image has a white background';
@@ -76,11 +82,7 @@ const getRGBstrings = imageData => {
 }
 
 const isWhite = rgbString => {
-  const whiteRet = rgbString.split(',').every(color => color === '255');
-  if (!whiteRet) {
-    console.log('not white: ', rgbString);
-  }
-  return whiteRet;
+  return rgbString.split(',').every(color => color === '255');
 }
 
 image.src = '/white.png';
