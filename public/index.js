@@ -55,17 +55,15 @@ image.onload = function() {
 
   const totalPixels = rgbArrays.reduce((acc, curr) => acc + curr.length, 0);
 
-  const mainEle = document.createElement('p');
-
-  document.querySelector('.main').appendChild(mainEle);
-
   console.log(numberOfWhites, ' > ', totalPixels);
   console.timeEnd('done');
 
+  const isWhiteEle = document.querySelector('.is-white');
+
   if (numberOfWhites > totalPixels * 0.7) {
-    mainEle.innerText = 'This image has a white background';
+    isWhiteEle.innerText = 'This image has a white background';
   } else {
-    mainEle.innerText = 'This image does not have a white background';
+    isWhiteEle.innerText = 'This image does not have a white background';
   }
 };
 
