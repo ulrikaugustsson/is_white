@@ -1,0 +1,14 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target":  "es5",
+    "sourceMap": true,
+    "listFiles": true,
+    "outDir": "./dist"
+  },
+  "files": [
+    "./example/index.ts",
+    "./index.ts"
+  ]
+}
