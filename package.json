@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build-example": "tsc example/index.ts --outDir dist && browserify dist/example/index.js --outfile example/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "tsc index.ts --watch --target ES5 --sourceMap",
-    "build": "tsc index.ts --declaration --removeComments --target ES5 --sourceMap",
+    "watch": "tsc index.ts --watch --sourceMap",
+    "build": "tsc index.ts --declaration --removeComments --sourceMap",
     "prepublish": "npm build",
     "start": "node server.js"
   },
@@ -23,6 +24,7 @@
   "dependencies": {
   },
   "devDependencies": {
+    "browserify": "^13.0.0",
     "express": "^4.13.4",
     "typescript": "^1.8.10"
   }
